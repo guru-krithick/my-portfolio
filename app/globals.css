@@ -1,0 +1,235 @@
+/* @import 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display&family=Leckerli+One&display=swap'; */
+/* @import 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display&display=swap'; */
+/* @import 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display&family=Ephesis&display=swap'; */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display&family=Ephesis&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+html {
+  font-family: "Ephesis", "Poppins", "Playfair Display", sans-serif;
+}
+
+body {
+  font-family: var(--font-poppins), var(--font-ephesis), var(--font-playfair), sans-serif;
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+@layer base {
+  /* Default Dark Theme */
+  :root {
+    --background: 221 39% 11%; /* Rich Black */
+    --foreground: 210 40% 98%; /* White-ish foreground */
+
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217 91% 60%; /* Glaucous */
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 217 32% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 32% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 217 32% 17%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 32% 17%;
+    --input: 217 32% 17%;
+    --ring: 224 76% 48%;
+
+    --radius: 0.5rem;
+  }
+
+  /* Light Theme */
+  .light {
+    --background: 0 0% 100%; /* White */
+    --foreground: 222 47% 11%; /* Rich Black */
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 221 83% 53%; /* Powder Blue */
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96%; /* Columbia Blue */
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 210 40% 96%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 221 83% 53%;
+  }
+}
+
+.github-calendar .day {
+  width: 3.5rem;                  /* Set width */
+  height: 3.5rem;                 /* Set height */
+  border-radius: 0.25rem;        /* Apply rounded corners */
+  border: 5px solid rgba(255, 255, 255, 0.3); /* Light gray border with transparency */
+  transition: border-color 0.2s ease; /* Add smooth transition for hover effect */
+}
+
+.github-calendar .day:hover {
+  border-color: #3B82F6; /* Change border color on hover (blue) */
+}
+
+/* Custom CSS to apply vibrant blue colors with darker shades for less activity */
+.react-github-calendar .react-github-calendar-day-0 {
+  background-color: #1e3a8a; /* Darker blue for least active days */
+}
+
+.react-github-calendar .react-github-calendar-day-1 {
+  background-color: #2563eb; /* Lively blue for low activity */
+}
+
+.react-github-calendar .react-github-calendar-day-2 {
+  background-color: #3b82f6; /* Medium vibrant blue for moderate activity */
+}
+
+.react-github-calendar .react-github-calendar-day-3 {
+  background-color: #60a5fa; /* Brighter blue for more active days */
+}
+
+.react-github-calendar .react-github-calendar-day-4 {
+  background-color: #93c5fd; /* Very vibrant and bright blue for highly active days */
+}
+
+
+@keyframes gradientRotation {
+  0% {
+    border-image-source: linear-gradient(90deg, #0000ff, #1e90ff, #0000ff);
+  }
+  25% {
+    border-image-source: linear-gradient(90deg, #1e90ff, #00bfff, #1e90ff);
+  }
+  50% {
+    border-image-source: linear-gradient(90deg, #00bfff, #4682b4, #00bfff);
+  }
+  75% {
+    border-image-source: linear-gradient(90deg, #4682b4, #1e90ff, #4682b4);
+  }
+  100% {
+    border-image-source: linear-gradient(90deg, #1e90ff, #0000ff, #1e90ff);
+  }
+}
+
+.animate-gradient-rotation {
+  animation: gradientRotation 5s linear infinite;
+  border-width: 5px;
+  border-style: solid;
+  border-image-slice: 1;
+}
+
+@keyframes gradient-Rotation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-text {
+  background-image: linear-gradient(90deg, 
+    #00bfff, /* Deep Sky Blue */
+    #1e90ff, /* Dodger Blue */
+    #4169e1, /* Royal Blue */
+    #00c6ff, /* Vibrant Cyan Blue */
+    #4682b4  /* Steel Blue */
+  );
+  background-size: 300% 300%;
+  background-clip: text;
+  -webkit-background-clip: text; /* For Webkit browsers */
+  color: transparent; /* Makes the gradient visible on the text */
+  animation: gradient-Rotation 6s ease infinite; /* Smooth gradient animation */
+  font-weight: bold; /* Makes the text more visually striking */
+}
+
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Utility Classes */
+.glass-effect {
+  @apply bg-background/80 backdrop-blur-md border-b border-border/50;
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+}
+
+.hover-lift {
+  @apply transition-transform duration-300 hover:-translate-y-1;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+.slick-container {
+  @apply -mx-4;
+}
+
+.slick-slide {
+  @apply px-4;
+}
+@keyframes typing {
+  0%, 100% { width: 0; }
+  10%, 90% { width: 58px; }
+  30%, 70% { width: 215px; max-width: max-content; }
+}
+
+@keyframes blink {
+  20%, 80% { transform: scaleY(1); }
+  50% { transform: scaleY(0); }
+}
+
+@layer utilities {
+  .animate-typing span:first-child {
+    animation: typing 8s steps(22) infinite;
+  }
+  
+  .animate-blink {
+    animation: blink 0.5s infinite;
+  }
+}
