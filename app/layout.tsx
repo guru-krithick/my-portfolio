@@ -1,6 +1,8 @@
+
 import './globals.css'
 import { Poppins, Playfair_Display, Ephesis } from 'next/font/google'
 import { ThemeProvider } from "@/components/theme-provider"
+
 
 const poppins = Poppins({ 
   subsets: ['latin'],
@@ -39,7 +41,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          
         </ThemeProvider>
+        
       </body>
     </html>
   )

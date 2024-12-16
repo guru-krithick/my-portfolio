@@ -1,5 +1,6 @@
 'use client';  
 
+
 import React, { useEffect, useState } from "react";
 import { GitHubCalendar } from "github-contribution-calendar";
 const my_theme = {
@@ -11,6 +12,9 @@ const my_theme = {
 };
 
 export const GithubHeatmap = () => {
+
+    console.log(process.env.GITHUB_ACCESS_TOKEN);
+
     const [isClient, setIsClient] = useState(false);
   
     useEffect(() => {
@@ -18,11 +22,13 @@ export const GithubHeatmap = () => {
       setIsClient(true);
     }, []);
   
+
     if (!isClient) {
       // Render nothing or a loading indicator on the server-side
       return null;
     }
-  
+    
+    
     return (
       <section id="activity" className="py-2"> {/* Further reduced padding */}
         <div className="w-full p-4 md:p-8 flex justify-center items-center bg-background">
@@ -31,7 +37,7 @@ export const GithubHeatmap = () => {
             <div className="flex justify-center">
               <GitHubCalendar
                 username="guru-krithick"
-                token={process.env.GITHUB_TOKEN}
+                token={process.env.NEXT_PUBLIC_GITHUB_ACCESS_TOKEN}
 // Optional: default is undefined
                 year={2024} // Optional: default is current year
                 showLabels={true} // Optional
@@ -44,7 +50,7 @@ export const GithubHeatmap = () => {
               />
             </div>
             <p className="text-center mt-2 text-muted-foreground text-xl pb-6"> {/* Reduced margin-top */}
-              Track my GitHub contributions over time. The more green the blocks, the more active I am on GitHub.
+              Track my GitHub contributions over time. The more blue the blocks, the more active I am on GitHub.
             </p>
           </div>
         </div>

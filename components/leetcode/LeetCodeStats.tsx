@@ -31,7 +31,7 @@ export default async function LeetCodeStats({
             </div>
           </div>
           <p className="text-center mt-2 pt-4 text-muted-foreground text-xl pb-10"> {/* Reduced margin-top and padding-top */}
-            Track your LeetCode submissions over time. The more green the blocks, the more active you are on LeetCode.
+            Track your LeetCode submissions over time. The more blue the blocks, the more active you are on LeetCode.
           </p>
         </div>
       </div>

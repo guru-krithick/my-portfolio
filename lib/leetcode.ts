@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { time } from "console";
+
 const LEETCODE_API_ENDPOINT = 'https://leetcode.com/graphql';
 
 const queries = {
@@ -66,16 +69,17 @@ export async function getUserHeatmap(username: string) {
   const calendar = JSON.parse(data.data.matchedUser.submissionCalendar);
 
   // Create an array for the last 365 days (53 weeks)
-  const days = Array.from({ length: 365 }, (_, i) => {
+  const days = Array.from({ length: 364 }, (_, i) => {
     const date = new Date();
-    date.setDate(date.getDate() - (364 - i));  // Adjust for 365 days
+    date.setDate(date.getDate() - (363 - i));  // Adjust for 365 days
 
     // Using UTC to avoid timezone issues
     const timestamp = Math.floor(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()) / 1000);
 
     return {
       date: date.toLocaleDateString(),
-      submissionCount: calendar[timestamp] || 0
+      submissionCount: calendar[timestamp] || 0,
+      key : timestamp
     };
   });
 

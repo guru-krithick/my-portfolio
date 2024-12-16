@@ -28,12 +28,14 @@ export default function Contact() {
     <section id="contact" className="py-24 bg-gradient-to-br from-background to-secondary">
       <div className="container mx-auto px-4">
         <motion.h2
-          className="text-4xl font-bold text-center mb-12 gradient-text font-playfair"
+          className="font-ephesis text-6xl font-medium text-gray-900 dark:text-gray-100text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Get in Touch
+          Get in 
+          {" "}
+          <span className="text-primary font-playfair text-primary text-5xl font-bold ">Touch</span>
         </motion.h2>
         <motion.form
           className="max-w-md mx-auto"
