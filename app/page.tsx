@@ -12,9 +12,6 @@ import EducationTimeline from '@/components/education-timeline'
 import AboutMe from '@/components/about-me'
 import { GithubHeatmap } from '@/components/github-calender'
 
-import LeetCodeStats from '@/components/leetcode/LeetCodeStats'
-import FloatingHireMe from '@/components/floating-hire-button'
-
 export default function Home() {
   return (
     <main className="min-h-screen">
@@ -24,17 +21,17 @@ export default function Home() {
       <Skills />
       <AboutMe />
       <div className="felx felx-row gap-2">
-        <h3 className="text-3xl font-semibold text-center text-black font-playfair mb-4 pb-2 pt-6">Github & Lettcode 
-          <br></br><span className="text-primary font-ephesis text-6xl font-medium">Activity Heatmap</span></h3>
+        <h3 className="text-5xl  text-center text-black font-ephesis mb-4 pb-2 pt-6">Github{"  "}
+         <span className="text-primary font-bold font-playfair text-4xl ">{" "}Activity Heatmap</span></h3>
       <GithubHeatmap />
-      <LeetCodeStats username="guru1307" />
+      {/* <LeetCodeStats username="guru1307" /> */}
       </div>
       <ProjectCarousel />
       <EducationTimeline />
       <Experience />
       <Contact />
       {/* <Socials/> */}
-      <FloatingHireMe/>
+      {/* <div className="md:min-w-[350px] min-w-full sm:min-w-[300px]"><FloatingHireMe/></div> */}
       
       <Footer />
     </main>

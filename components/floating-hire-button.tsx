@@ -8,6 +8,7 @@ import NextLink from 'next/link';
 const FloatingHireMe = () => {
   return (
     <StyledWrapper>
+      <div className="">
       <NextLink href="#contact">
       <button className="button">
         <p className="button__text">
@@ -19,7 +20,7 @@ const FloatingHireMe = () => {
           <span style={{ '--index': 5 } as React.CSSProperties}>M</span>
           <span style={{ '--index': 6 } as React.CSSProperties}>E</span>
         </p>
-        <div className="button__circle">
+        <div className="button__circle ">
           <svg
             width={14}
             className="button__icon"
@@ -47,6 +48,7 @@ const FloatingHireMe = () => {
         </div>
       </button>
       </NextLink>
+      </div>
     </StyledWrapper>
   );
 };
@@ -77,7 +79,7 @@ const StyledWrapper = styled.div`
   .button {
     cursor: pointer;
     border: none;
-    background: #e6f0ff;
+    background: #80b3ff;
     color: #0056b3;
     width: 100px;
     height: 100px;
