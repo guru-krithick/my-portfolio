@@ -1,51 +1,151 @@
 "use client"
 
-import { useState } from 'react'
-import { Button } from "@/components/ui/button"
+import { useState, useEffect } from 'react'
+import { getCertifications, createCertification, updateCertification, deleteCertification } from '@/lib/api'
 import { DataTable } from "@/components/admin/data-table"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Plus } from 'lucide-react'
+import { useToast } from "@/hooks/use-toast"
 
 interface Certification {
-  id: number
-  title: string
-  issuer: string
-  date: string
+  _id: string
+  name: string
+  provider: string
+  skills: string[]
   url: string
+  level: string
+  image: string
 }
 
-const initialCertifications: Certification[] = [
-  { id: 1, title: "Certification 1", issuer: "Issuer 1", date: "2023-01-01", url: "https://cert1.com" },
-  { id: 2, title: "Certification 2", issuer: "Issuer 2", date: "2023-02-01", url: "https://cert2.com" },
-]
-
 export default function CertificationsManagement() {
-  const [certifications, setCertifications] = useState(initialCertifications)
-  const [newCertification, setNewCertification] = useState<Omit<Certification, 'id'>>({ title: '', issuer: '', date: '', url: '' })
+  const [certifications, setCertifications] = useState<Certification[]>([])
+  const [totalPages, setTotalPages] = useState(0)
+  const [page, setPage] = useState(1)
+  const [search, setSearch] = useState('')
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [newCertification, setNewCertification] = useState<Omit<Certification, '_id'>>({
+    name: '',
+    provider: '',
+    skills: [],
+    url: '',
+    level: '',
+    image: ''
+  })
+  const { toast } = useToast()
+
+  useEffect(() => {
+    fetchCertifications()
+  }, [page, search])
+
+  const fetchCertifications = async () => {
+    try {
+      const { certifications, totalPages } = await getCertifications(search, page)
+      setCertifications(certifications)
+      setTotalPages(totalPages)
+    } catch (error) {
+      console.error('Error fetching certifications:', error)
+      toast({
+        title: "Error",
+        description: "Failed to fetch certifications",
+        variant: "destructive",
+      })
+    }
+  }
+
+  const handleCreateCertification = async (e: React.FormEvent) => {
+    e.preventDefault()
+    try {
+      const formData = new FormData()
+      Object.entries(newCertification).forEach(([key, value]) => {
+        if (key === 'skills') {
+          formData.append(key, (value as string[]).join(','))
+        } else if (key === 'image' && value instanceof File) {
+          formData.append(key, value)
+        } else {
+          formData.append(key, value as string)
+        }
+      })
+      await createCertification(formData)
+      setIsDialogOpen(false)
+      setNewCertification({
+        name: '',
+        provider: '',
+        skills: [],
+        url: '',
+        level: '',
+        image: ''
+      })
+      fetchCertifications()
+      toast({
+        title: "Success",
+        description: "Certification created successfully",
+      })
+    } catch (error) {
+      console.error('Error creating certification:', error)
+      toast({
+        title: "Error",
+        description: "Failed to create certification",
+        variant: "destructive",
+      })
+    }
+  }
+
+  const handleUpdateCertification = async (id: string, certificationData: Partial<Certification>) => {
+    try {
+      const formData = new FormData()
+      Object.entries(certificationData).forEach(([key, value]) => {
+        if (key === 'skills') {
+          formData.append(key, (value as string[]).join(','))
+        } else if (key === 'image' && value instanceof File) {
+          formData.append(key, value)
+        } else {
+          formData.append(key, value as string)
+        }
+      })
+      await updateCertification(id, formData)
+      fetchCertifications()
+      toast({
+        title: "Success",
+        description: "Certification updated successfully",
+      })
+    } catch (error) {
+      console.error('Error updating certification:', error)
+      toast({
+        title: "Error",
+        description: "Failed to update certification",
+        variant: "destructive",
+      })
+    }
+  }
+
+  const handleDeleteCertification = async (id: string) => {
+    try {
+      await deleteCertification(id)
+      fetchCertifications()
+      toast({
+        title: "Success",
+        description: "Certification deleted successfully",
+      })
+    } catch (error) {
+      console.error('Error deleting certification:', error)
+      toast({
+        title: "Error",
+        description: "Failed to delete certification",
+        variant: "destructive",
+      })
+    }
+  }
 
   const columns = [
-    { header: "Title", accessorKey: "title" },
-    { header: "Issuer", accessorKey: "issuer" },
-    { header: "Date", accessorKey: "date" },
+    { header: "Name", accessorKey: "name" },
+    { header: "Provider", accessorKey: "provider" },
+    { header: "Level", accessorKey: "level" },
     { header: "URL", accessorKey: "url" },
   ]
-
-  const handleAddCertification = () => {
-    setCertifications([...certifications, { id: Date.now(), ...newCertification }])
-    setNewCertification({ title: '', issuer: '', date: '', url: '' })
-    setIsDialogOpen(false)
-  }
-
-  const handleEditCertification = (certification: Certification) => {
-    // Implement edit logic
-  }
-
-  const handleDeleteCertification = (certification: Certification) => {
-    setCertifications(certifications.filter(c => c.id !== certification.id))
-  }
 
   return (
     <div>
@@ -61,55 +161,102 @@ export default function CertificationsManagement() {
             <DialogHeader>
               <DialogTitle>Add New Certification</DialogTitle>
             </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="title" className="text-right">Title</Label>
+            <form onSubmit={handleCreateCertification} className="space-y-4">
+              <div>
+                <Label htmlFor="name">Name</Label>
                 <Input
-                  id="title"
-                  value={newCertification.title}
-                  onChange={(e) => setNewCertification({ ...newCertification, title: e.target.value })}
-                  className="col-span-3"
+                  id="name"
+                  value={newCertification.name}
+                  onChange={(e) => setNewCertification({ ...newCertification, name: e.target.value })}
+                  required
                 />
               </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="issuer" className="text-right">Issuer</Label>
+              <div>
+                <Label htmlFor="provider">Provider</Label>
                 <Input
-                  id="issuer"
-                  value={newCertification.issuer}
-                  onChange={(e) => setNewCertification({ ...newCertification, issuer: e.target.value })}
-                  className="col-span-3"
+                  id="provider"
+                  value={newCertification.provider}
+                  onChange={(e) => setNewCertification({ ...newCertification, provider: e.target.value })}
+                  required
                 />
               </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="date" className="text-right">Date</Label>
+              <div>
+                <Label htmlFor="skills">Skills (comma-separated)</Label>
                 <Input
-                  id="date"
-                  type="date"
-                  value={newCertification.date}
-                  onChange={(e) => setNewCertification({ ...newCertification, date: e.target.value })}
-                  className="col-span-3"
+                  id="skills"
+                  value={newCertification.skills.join(', ')}
+                  onChange={(e) => setNewCertification({ ...newCertification, skills: e.target.value.split(',').map(s => s.trim()) })}
                 />
               </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="url" className="text-right">URL</Label>
+              <div>
+                <Label htmlFor="url">URL</Label>
                 <Input
                   id="url"
                   value={newCertification.url}
                   onChange={(e) => setNewCertification({ ...newCertification, url: e.target.value })}
-                  className="col-span-3"
+                  required
                 />
               </div>
-            </div>
-            <Button onClick={handleAddCertification}>Add Certification</Button>
+              <div>
+                <Label htmlFor="level">Level</Label>
+                <Select
+                  value={newCertification.level}
+                  onValueChange={(value) => setNewCertification({ ...newCertification, level: value })}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select level" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="basic">Basic</SelectItem>
+                    <SelectItem value="intermediate">Intermediate</SelectItem>
+                    <SelectItem value="advanced">Advanced</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label htmlFor="image">Image</Label>
+                <Input
+                  id="image"
+                  type="file"
+                  onChange={(e) => setNewCertification({ ...newCertification, image: e.target.files?.[0] || '' })}
+                  required
+                />
+              </div>
+              <Button type="submit">Add Certification</Button>
+            </form>
           </DialogContent>
         </Dialog>
+      </div>
+      <div className="mb-4">
+        <Input
+          placeholder="Search certifications..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
       </div>
       <DataTable
         data={certifications}
         columns={columns}
-        onEdit={handleEditCertification}
+        onEdit={handleUpdateCertification}
         onDelete={handleDeleteCertification}
       />
+      {totalPages > 1 && (
+        <div className="mt-4 flex justify-center">
+          <Button
+            onClick={() => setPage(prev => Math.max(prev - 1, 1))}
+            disabled={page === 1}
+          >
+            Previous
+          </Button>
+          <span className="mx-4">Page {page} of {totalPages}</span>
+          <Button
+            onClick={() => setPage(prev => Math.min(prev + 1, totalPages))}
+            disabled={page === totalPages}
+          >
+            Next
+          </Button>
+        </div>
+      )}
     </div>
   )
 }

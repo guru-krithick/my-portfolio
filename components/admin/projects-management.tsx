@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { getProjects, createProject, updateProject, deleteProject } from '@/lib/api'
 import { DataTable } from "@/components/admin/data-table"
 import { Button } from "@/components/ui/button"
@@ -16,18 +16,23 @@ interface Project {
   title: string
   subtitle: string
   description: string
-  image: string
+  image: string | File
   githubUrl: string
   liveUrl: string
   skills: string[]
 }
 
+interface ApiResponse {
+  projects: Project[]
+  totalPages: number
+}
+
 export default function ProjectsManagement() {
   const [projects, setProjects] = useState<Project[]>([])
-  const [totalPages, setTotalPages] = useState(0)
-  const [page, setPage] = useState(1)
-  const [search, setSearch] = useState('')
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [totalPages, setTotalPages] = useState<number>(0)
+  const [page, setPage] = useState<number>(1)
+  const [search, setSearch] = useState<string>('')
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false)
   const [newProject, setNewProject] = useState<Omit<Project, '_id'>>({
     title: '',
     subtitle: '',
@@ -39,13 +44,9 @@ export default function ProjectsManagement() {
   })
   const { toast } = useToast()
 
-  useEffect(() => {
-    fetchProjects()
-  }, [page, search])
-
-  const fetchProjects = async () => {
+  const fetchProjects = useCallback(async () => {
     try {
-      const { projects, totalPages } = await getProjects(search, page)
+      const { projects, totalPages } = await getProjects(search, page) as ApiResponse
       setProjects(projects)
       setTotalPages(totalPages)
     } catch (error) {
@@ -56,7 +57,11 @@ export default function ProjectsManagement() {
         variant: "destructive",
       })
     }
-  }
+  }, [search, page, toast])
+
+  useEffect(() => {
+    fetchProjects()
+  }, [fetchProjects])
 
   const handleCreateProject = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -143,7 +148,7 @@ export default function ProjectsManagement() {
     }
   }
 
-  const columns = [
+  const columns: { header: string, accessorKey: keyof Project }[] = [
     { header: "Title", accessorKey: "title" },
     { header: "Subtitle", accessorKey: "subtitle" },
     { header: "GitHub URL", accessorKey: "githubUrl" },
@@ -237,11 +242,11 @@ export default function ProjectsManagement() {
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-      <DataTable
+      <DataTable<Project>
         data={projects}
         columns={columns}
-        onEdit={handleUpdateProject}
-        onDelete={handleDeleteProject}
+        onEdit={(project: Project) => handleUpdateProject(project._id, project)}
+        onDelete={(project: Project) => handleDeleteProject(project._id)}
       />
       {totalPages > 1 && (
         <div className="mt-4 flex justify-center">
@@ -263,4 +268,3 @@ export default function ProjectsManagement() {
     </div>
   )
 }
-

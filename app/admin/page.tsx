@@ -1,6 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { getProjects, getCertifications, getTestimonials, getResume } from "@/lib/api"
 
-export default function AdminDashboard() {
+export default async function AdminDashboard() {
+  const { projects, totalPages: projectPages }: any= await getProjects()
+  const { certifications, totalPages: certPages } : any = await getCertifications()
+  const { testimonials, totalPages: testimonialPages } : any = await getTestimonials()
+  const resume = await getResume()
+
   return (
     <div>
       <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
@@ -10,7 +18,7 @@ export default function AdminDashboard() {
             <CardTitle>Total Projects</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-4xl font-bold">10</p>
+            <p className="text-4xl font-bold">{projects.length}</p>
           </CardContent>
         </Card>
         <Card>
@@ -18,7 +26,7 @@ export default function AdminDashboard() {
             <CardTitle>Total Certifications</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-4xl font-bold">5</p>
+            <p className="text-4xl font-bold">{certifications.length}</p>
           </CardContent>
         </Card>
         <Card>
@@ -26,15 +34,15 @@ export default function AdminDashboard() {
             <CardTitle>Total Testimonials</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-4xl font-bold">8</p>
+            <p className="text-4xl font-bold">{testimonials.length}</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>Resume Downloads</CardTitle>
+            <CardTitle>Resume</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-4xl font-bold">42</p>
+            <p className="text-4xl font-bold">{resume ? 'Uploaded' : 'Not Uploaded'}</p>
           </CardContent>
         </Card>
       </div>

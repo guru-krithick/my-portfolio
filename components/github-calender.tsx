@@ -6,7 +6,7 @@ import { GitHubCalendar } from "github-contribution-calendar";
 const my_theme = {
     noContributions: "#000000",  // Light Blue for no submissions
     low: "#3B82F64A",              // Light Purple-Blue for low submissions
-    moderate: "#3B82F6E1",         // Purple-Blue for moderate submissions
+    moderate: "#3B82E6d2",         // Purple-Blue for moderate submissions
     high: "#3B82F6FE",             // Blue for high submissions
     veryHigh: "#3B82F6",           // Darker Blue for very high submissions
 };

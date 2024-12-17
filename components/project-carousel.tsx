@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import ProjectCard from "./project-card";
 import { Button } from "./ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 const projects = [
   {
@@ -88,7 +89,7 @@ export default function ProjectCarousel() {
             </Button>
           </div>
         </div>
-
+        
         {/* Slider */}
         <Slider ref={sliderRef} {...settings} className="slick-container">
           {projects.map((project, index) => (
@@ -97,6 +98,14 @@ export default function ProjectCarousel() {
             </div>
           ))}
         </Slider>
+        <div className="flex justify-end mt-8">
+  <Link href="/#projects">
+    <Button size="lg" className="rounded-md">
+      View All Projects
+    </Button>
+  </Link>
+</div>
+
       </div>
     </section>
   );

@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 const DownloadButton = () => {
   const [isChecked, setIsChecked] = useState(false);
 
-  const handleCheckboxChange = (e) => {
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(e.target.checked);
     if (e.target.checked) {
       triggerDownload();
