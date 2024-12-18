@@ -5,7 +5,7 @@ import { Admin } from '@/lib/models/admin'
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, password } = await req.json()
+    const { email, password, username } = await req.json()
     
     await connectToDatabase()
     
@@ -18,13 +18,13 @@ export async function POST(req: NextRequest) {
     }
     
     // Hash password
-    const salt = await bcrypt.genSalt(10)
-    const hashedPassword = await bcrypt.hash(password, salt)
+    const hashedPassword = await bcrypt.hash(password, 10);
     
     // Create new admin
     const newAdmin = new Admin({
       email,
-      password: hashedPassword
+      password: hashedPassword,
+      username: username || email // Use email as username if not provided
     })
     
     await newAdmin.save()

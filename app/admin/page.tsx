@@ -4,10 +4,26 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { getProjects, getCertifications, getTestimonials, getResume } from "@/lib/api"
 
 export default async function AdminDashboard() {
-  const { projects, totalPages: projectPages }: any= await getProjects()
-  const { certifications, totalPages: certPages } : any = await getCertifications()
-  const { testimonials, totalPages: testimonialPages } : any = await getTestimonials()
-  const resume = await getResume()
+  let projects = [], certifications = [], testimonials = [], resume = null;
+  let projectPages = 0, certPages = 0, testimonialPages = 0;
+
+  try {
+    const projectsData = await getProjects() as { projects: any[], totalPages: number };
+    projects = projectsData.projects;
+    projectPages = projectsData.totalPages;
+
+    const certificationsData = await getCertifications() as { certifications: any[], totalPages: number };
+    certifications = certificationsData.certifications;
+    certPages = certificationsData.totalPages;
+
+    const testimonialsData = await getTestimonials() as { testimonials: any[], totalPages: number };
+    testimonials = testimonialsData.testimonials;
+    testimonialPages = testimonialsData.totalPages;
+
+    resume = await getResume();
+  } catch (error) {
+    console.error("Error fetching dashboard data:", error);
+  }
 
   return (
     <div>

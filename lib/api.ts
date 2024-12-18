@@ -9,9 +9,12 @@ const api = axios.create({
 
 // Interceptor to add token to requests
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('adminToken')
-  if (token) {
-    config.headers['Authorization'] = `Bearer ${token}`
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem('adminToken')
+    if (token) {
+      config.headers = config.headers || {};
+      config.headers['Authorization'] = `Bearer ${token}`
+    }
   }
   return config
 })
@@ -27,15 +30,17 @@ export const logout = async () => {
   return response.data
 }
 
-export const signup = async (email: string, password: string) => {
-  const response = await api.post('/auth/signup', { email, password })
+export const signup = async (email: string, password: string, username?: string) => {
+  const response = await api.post('/auth/signup', { email, password, username })
   return response.data
 }
 
 // Projects
 export const getProjects = async (search: string = '', page: number = 1, limit: number = 8) => {
   const response = await api.get(`/projects?search=${search}&page=${page}&limit=${limit}`)
+  console.log(`Request URL: /projects?search=${search}&page=${page}&limit=${limit}`);
   return response.data
+  
 }
 
 export const createProject = async (projectData: FormData) => {

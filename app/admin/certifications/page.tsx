@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 
 import { useState, useEffect } from 'react'
@@ -18,7 +20,7 @@ interface Certification {
   skills: string[]
   url: string
   level: string
-  image: string
+  image: string | File
 }
 
 export default function CertificationsManagement() {
@@ -43,7 +45,7 @@ export default function CertificationsManagement() {
 
   const fetchCertifications = async () => {
     try {
-      const { certifications, totalPages } = await getCertifications(search, page)
+      const { certifications, totalPages } = await getCertifications(search, page) as { certifications: Certification[], totalPages: number }
       setCertifications(certifications)
       setTotalPages(totalPages)
     } catch (error) {
@@ -94,7 +96,8 @@ export default function CertificationsManagement() {
     }
   }
 
-  const handleUpdateCertification = async (id: string, certificationData: Partial<Certification>) => {
+  const handleUpdateCertification = async (certification: Certification) => {
+    const { _id, ...certificationData } = certification
     try {
       const formData = new FormData()
       Object.entries(certificationData).forEach(([key, value]) => {
@@ -106,7 +109,7 @@ export default function CertificationsManagement() {
           formData.append(key, value as string)
         }
       })
-      await updateCertification(id, formData)
+      await updateCertification(_id, formData)
       fetchCertifications()
       toast({
         title: "Success",
@@ -122,9 +125,9 @@ export default function CertificationsManagement() {
     }
   }
 
-  const handleDeleteCertification = async (id: string) => {
+  const handleDeleteCertification = async (certification: Certification) => {
     try {
-      await deleteCertification(id)
+      await deleteCertification(certification._id)
       fetchCertifications()
       toast({
         title: "Success",
@@ -140,7 +143,7 @@ export default function CertificationsManagement() {
     }
   }
 
-  const columns = [
+  const columns: { header: string, accessorKey: keyof Certification }[] = [
     { header: "Name", accessorKey: "name" },
     { header: "Provider", accessorKey: "provider" },
     { header: "Level", accessorKey: "level" },
@@ -234,7 +237,7 @@ export default function CertificationsManagement() {
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-      <DataTable
+      <DataTable<Certification>
         data={certifications}
         columns={columns}
         onEdit={handleUpdateCertification}

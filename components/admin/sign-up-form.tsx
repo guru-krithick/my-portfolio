@@ -1,48 +1,62 @@
 "use client"
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { cn } from "@/lib/utils"
-// import { Button } from "@/components/ui/button"
-import { Home, Briefcase, Award, MessageSquare, FileText } from 'lucide-react'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { signup } from '@/lib/api'
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { useToast } from "@/hooks/use-toast"
 
-const navItems = [
-  { name: 'Dashboard', href: '/admin', icon: Home },
-  { name: 'Projects', href: '/admin/projects', icon: Briefcase },
-  { name: 'Certifications', href: '/admin/certifications', icon: Award },
-  { name: 'Testimonials', href: '/admin/testimonials', icon: MessageSquare },
-  { name: 'Resume', href: '/admin/resume', icon: FileText },
-]
+export default function SignupForm() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [username, setUsername] = useState('')
+  const router = useRouter()
+  const { toast } = useToast()
 
-export function Sidebar() {
-  const pathname = usePathname()
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    try {
+      await signup(email, password, username)
+      toast({
+        title: "Success",
+        description: "Admin account created successfully",
+      })
+      router.push('/admin/login')
+    } catch (error) {
+      console.error('Signup error:', error)
+      toast({
+        title: "Error",
+        description: "Failed to create admin account",
+        variant: "destructive",
+      })
+    }
+  }
 
   return (
-    <div className="flex flex-col w-64 bg-white shadow">
-      <div className="flex items-center justify-center h-16 border-b">
-        <span className="text-2xl font-semibold text-blue-600">Admin Dashboard</span>
-      </div>
-      <nav className="flex-1 overflow-y-auto">
-        <ul className="p-4 space-y-2">
-          {navItems.map((item) => (
-            <li key={item.name}>
-              <Link
-                href={item.href}
-                className={cn(
-                  "flex items-center px-4 py-2 rounded-md text-sm font-medium transition-colors",
-                  pathname === item.href
-                    ? "bg-blue-100 text-blue-600"
-                    : "text-gray-600 hover:bg-blue-50 hover:text-blue-600"
-                )}
-              >
-                <item.icon className="mr-3 h-5 w-5" />
-                {item.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </div>
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <Input
+        type="text"
+        placeholder="Username (optional)"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <Input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
+      <Input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
+      <Button type="submit" className="w-full">Sign Up</Button>
+    </form>
   )
 }
 

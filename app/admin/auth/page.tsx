@@ -11,6 +11,7 @@ export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [username, setUsername] = useState('') // Added username state
   const router = useRouter()
   const { toast } = useToast()
 
@@ -26,14 +27,14 @@ export default function AuthPage() {
     try {
       if (isLogin) {
         const data = await login(email, password) as { token: string }
-        localStorage.setItem('adminToken', data.token) 
+        localStorage.setItem('adminToken', data.token)
         toast({
           title: "Success",
           description: "Logged in successfully",
         })
         router.push('/admin')
       } else {
-        await signup(email, password)
+        await signup(email, password, username) // Updated signup call with username
         toast({
           title: "Success",
           description: "Signed up successfully. Please log in.",
@@ -61,6 +62,20 @@ export default function AuthPage() {
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
+            {!isLogin && (
+              <div>
+                <Input
+                  id="username"
+                  name="username"
+                  type="text"
+                  autoComplete="username"
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  placeholder="Username (optional)"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
+            )}
             <div>
               <Input
                 id="email-address"
