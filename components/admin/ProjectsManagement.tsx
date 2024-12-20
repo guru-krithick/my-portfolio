@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { getProjects, createProject, updateProject, deleteProject } from '@/lib/api'
-import { DataTable } from "@/components/admin/data-table"
+import { DataTable } from "@/components/admin/DataTable"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"

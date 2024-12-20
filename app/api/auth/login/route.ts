@@ -3,7 +3,7 @@ import { sign } from 'jsonwebtoken';
 import { serialize } from 'cookie';
 import { connectToDatabase } from '@/lib/mongodb';
 import { Admin } from '@/lib/models/admin';
-import bcrypt from 'bcryptjs';
+import bcryptjs from 'bcryptjs';
 
 const SECRET_KEY = process.env.JWT_SECRET_KEY || 'your-secret-key';
 
@@ -37,10 +37,10 @@ export async function POST(req: Request) {
           const hashedPassword = '$2a$10$8B0DGFEnrp5X/LMDjsZBFuUM3.gkyZkbSUU9fQAvhpJ2B/W5sGFe.';
 const plainPassword = 'guru1307';
 
-bcrypt.compare(plainPassword, hashedPassword).then((isValid) => {
+bcryptjs.compare(plainPassword, hashedPassword).then((isValid) => {
   console.log('Password Match:', isValid); // Should log `true` if correct
 });
-        const isPasswordValid = await bcrypt.compare(password, admin.password);
+        const isPasswordValid = await bcryptjs.compare(password, admin.password);
         // console.log(bcrypt.compare(password, admin.password))
         console.log(isPasswordValid)
         console.log(admin.password)

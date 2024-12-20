@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { Toaster } from "@/components/ui/toaster"
-import { Sidebar } from '@/components/admin/sidebar'
+import { Sidebar } from '@/components/admin/Sidebar'
 import { Button } from "@/components/ui/button"
 import { logout } from '@/lib/api'
 import { useToast } from "@/hooks/use-toast"

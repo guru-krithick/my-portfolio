@@ -1,16 +1,16 @@
 
-import FloatingHeader from '@/components/floating-header'
-import Hero from '@/components/hero'
+import FloatingHeader from '@/components/FloatingHeader'
+import Hero from '@/components/Sections/Hero'
 // import Services from '@/components/services'
-import Skills from '@/components/skills'
+import Skills from '@/components/Sections/Skills'
 //import Projects from '@/components/projects'
-import Experience from '@/components/experience'
-import Contact from '@/components/contact'
-import Footer from '@/components/footer'
-import ProjectCarousel from '@/components/project-carousel'
+import Experience from '@/components/Sections/Experience'
+import Contact from '@/components/Sections/Contact'
+import Footer from '@/components/Footer'
+import ProjectCarousel from '@/components/Sections/ProjectCarousel'
 import EducationTimeline from '@/components/education-timeline'
-import AboutMe from '@/components/about-me'
-import { GithubHeatmap } from '@/components/github-calender'
+import AboutMe from '@/components/Sections/AboutMe'
+import { GithubHeatmap } from '@/components/GithubCalender'
 
 export default function Home() {
   return (

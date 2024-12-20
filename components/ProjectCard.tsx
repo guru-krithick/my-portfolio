@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Globe, Github } from "lucide-react";
-import ProjectButton from "./view-projects-button";
+import ProjectButton from "./Elements/view-projects-button";
 
 interface ProjectCardProps {
   title: string;

@@ -17,15 +17,36 @@ api.interceptors.request.use((config) => {
     }
   }
   return config
+}, (error) => {
+  return Promise.reject(error)
 })
+
+// Add a response interceptor to handle 401 errors
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      // Redirect to login page or refresh token
+      if (typeof window !== 'undefined') {
+        window.location.href = '/admin/auth'
+      }
+    }
+    return Promise.reject(error)
+  }
+)
 
 // Auth
 export const login = async (email: string, password: string) => {
   const response = await api.post('/auth/login', { email, password })
+  const data = response.data as { token?: string };
+  if (data.token) {
+    localStorage.setItem('adminToken', data.token)
+  }
   return response.data
 }
 
 export const logout = async () => {
+  localStorage.removeItem('adminToken')
   const response = await api.post('/auth/logout')
   return response.data
 }
@@ -37,10 +58,8 @@ export const signup = async (email: string, password: string, username?: string)
 
 // Projects
 export const getProjects = async (search: string = '', page: number = 1, limit: number = 8) => {
-  const response = await api.get(`/projects?search=${search}&page=${page}&limit=${limit}`)
-  console.log(`Request URL: /projects?search=${search}&page=${page}&limit=${limit}`);
+  const response = await api.get('projects', { params: { search, page, limit } })
   return response.data
-  
 }
 
 export const createProject = async (projectData: FormData) => {
@@ -64,7 +83,7 @@ export const deleteProject = async (id: string) => {
 
 // Certifications
 export const getCertifications = async (search: string = '', page: number = 1, limit: number = 8) => {
-  const response = await api.get(`/certifications?search=${search}&page=${page}&limit=${limit}`)
+  const response = await api.get('certifications', { params: { search, page, limit } })
   return response.data
 }
 
@@ -89,7 +108,7 @@ export const deleteCertification = async (id: string) => {
 
 // Testimonials
 export const getTestimonials = async (page: number = 1, limit: number = 8) => {
-  const response = await api.get(`/testimonials?page=${page}&limit=${limit}`)
+  const response = await api.get('testimonials', { params: { page, limit } })
   return response.data
 }
 
@@ -114,7 +133,7 @@ export const deleteTestimonial = async (id: string) => {
 
 // Resume
 export const getResume = async () => {
-  const response = await api.get('/resume')
+  const response = await api.get('resume')
   return response.data
 }
 

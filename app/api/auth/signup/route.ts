@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import bcrypt from 'bcryptjs'
+import bcryptjs from 'bcryptjs'
 import { connectToDatabase } from '@/lib/mongodb'
 import { Admin } from '@/lib/models/admin'
 
@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
     }
     
     // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcryptjs.hash(password, 10);
     
     // Create new admin
     const newAdmin = new Admin({

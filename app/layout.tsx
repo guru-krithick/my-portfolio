@@ -1,7 +1,7 @@
 
 import './globals.css'
 import { Poppins, Playfair_Display, Ephesis } from 'next/font/google'
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/components/ThemeProvider"
 
 
 const poppins = Poppins({ 
