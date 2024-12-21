@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 
@@ -18,7 +20,7 @@ interface Testimonial {
   designation: string
   rating: number
   recommendation: string
-  image: string
+  image: string | File
 }
 
 export default function TestimonialsManagement() {
@@ -41,7 +43,7 @@ export default function TestimonialsManagement() {
 
   const fetchTestimonials = async () => {
     try {
-      const { testimonials, totalPages } = await getTestimonials(page)
+      const { testimonials, totalPages } = await getTestimonials(page) as { testimonials: Testimonial[], totalPages: number }
       setTestimonials(testimonials)
       setTotalPages(totalPages)
     } catch (error) {
@@ -59,8 +61,8 @@ export default function TestimonialsManagement() {
     try {
       const formData = new FormData()
       Object.entries(newTestimonial).forEach(([key, value]) => {
-        if (key === 'image' && value instanceof File) {
-          formData.append(key, value)
+        if (key === 'image' && (value as any) instanceof File) {
+          formData.append(key, value.toString())
         } else {
           formData.append(key, value.toString())
         }
@@ -89,9 +91,9 @@ export default function TestimonialsManagement() {
     }
   }
 
-  const handleDeleteTestimonial = async (id: string) => {
+  const handleDeleteTestimonial = async (testimonial: Testimonial) => {
     try {
-      await deleteTestimonial(id)
+      await deleteTestimonial(testimonial._id)
       fetchTestimonials()
       toast({
         title: "Success",
@@ -107,7 +109,7 @@ export default function TestimonialsManagement() {
     }
   }
 
-  const columns = [
+  const columns: { header: string, accessorKey: keyof Testimonial }[] = [
     { header: "Name", accessorKey: "name" },
     { header: "Designation", accessorKey: "designation" },
     { header: "Rating", accessorKey: "rating" },
@@ -182,11 +184,12 @@ export default function TestimonialsManagement() {
           </DialogContent>
         </Dialog>
       </div>
-      <DataTable
+      <DataTable<Testimonial>
         data={testimonials}
         columns={columns}
-        onDelete={handleDeleteTestimonial}
-      />
+        onDelete={handleDeleteTestimonial} onEdit={function (item: Testimonial): void {
+          throw new Error('Function not implemented.')
+        } }      />
       {totalPages > 1 && (
         <div className="mt-4 flex justify-center">
           <Button

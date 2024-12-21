@@ -17,7 +17,7 @@ interface Project {
   title: string
   subtitle: string
   description: string
-  image: string
+  image: string | File
   githubUrl: string
   liveUrl: string
   skills: string[]
@@ -46,7 +46,7 @@ export default function ProjectsManagement() {
 
   const fetchProjects = async () => {
     try {
-      const { projects, totalPages } = await getProjects(search, page)
+      const { projects, totalPages } = await getProjects(search, page) as { projects: Project[], totalPages: number }
       setProjects(projects)
       setTotalPages(totalPages)
     } catch (error) {
@@ -98,10 +98,10 @@ export default function ProjectsManagement() {
     }
   }
 
-  const handleUpdateProject = async (id: string, projectData: Partial<Project>) => {
+  const handleUpdateProject = async (project: Project) => {
     try {
       const formData = new FormData()
-      Object.entries(projectData).forEach(([key, value]) => {
+      Object.entries(project).forEach(([key, value]) => {
         if (key === 'skills') {
           formData.append(key, (value as string[]).join(','))
         } else if (key === 'image' && value instanceof File) {
@@ -110,7 +110,7 @@ export default function ProjectsManagement() {
           formData.append(key, value as string)
         }
       })
-      await updateProject(id, formData)
+      await updateProject(project._id, formData)
       fetchProjects()
       toast({
         title: "Success",
@@ -126,9 +126,9 @@ export default function ProjectsManagement() {
     }
   }
 
-  const handleDeleteProject = async (id: string) => {
+  const handleDeleteProject = async (project: Project) => {
     try {
-      await deleteProject(id)
+      await deleteProject(project._id)
       fetchProjects()
       toast({
         title: "Success",
@@ -144,7 +144,7 @@ export default function ProjectsManagement() {
     }
   }
 
-  const columns = [
+  const columns: { header: string, accessorKey: keyof Project }[] = [
     { header: "Title", accessorKey: "title" },
     { header: "Subtitle", accessorKey: "subtitle" },
     { header: "GitHub URL", accessorKey: "githubUrl" },
@@ -238,10 +238,10 @@ export default function ProjectsManagement() {
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-      <DataTable
+      <DataTable<Project>
         data={projects}
         columns={columns}
-        onEdit={handleUpdateProject}
+        onEdit={(project) => handleUpdateProject(project)}
         onDelete={handleDeleteProject}
       />
       {totalPages > 1 && (

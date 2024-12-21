@@ -26,8 +26,8 @@ export default function ResumeManagement() {
 
   const fetchResume = async () => {
     try {
-      const resumeData = await getResume()
-      setResume(resumeData)
+      const resumeData = await getResume() as Resume
+      setResume(resumeData as Resume)
       setNewResumeUrl(resumeData?.url || '')
     } catch (error) {
       console.error('Error fetching resume:', error)

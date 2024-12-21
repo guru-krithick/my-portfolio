@@ -3,8 +3,8 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Button } from "@/components/ui/button";
-import { TerminalAnimation } from "@/components/Elements/terminal-animation";
-import DownloadButton from '../Elements/download-button';
+import { TerminalAnimation } from "@/components/Elements/TerminalAnimation";
+import DownloadButton from '../Elements/DownloadButton';
 
 export default function Hero() {
   return (

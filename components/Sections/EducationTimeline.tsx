@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Card } from './ui/card'
+import { Card } from '../ui/card'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -30,7 +30,7 @@ const education = [
 
 export default function EducationTimeline() {
   const timelineRef = useRef(null)
-  const cardsRef = useRef([])
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
     const timeline = timelineRef.current
@@ -86,7 +86,7 @@ export default function EducationTimeline() {
           {education.map((item, index) => (
             <div
               key={index}
-              ref={el => cardsRef.current[index] = el}
+              ref={el => { cardsRef.current[index] = el }}
               className={`relative flex items-center mb-12 ${
                 index % 2 === 0 ? 'justify-start' : 'justify-end'
               }`}

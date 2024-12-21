@@ -7,7 +7,7 @@ import { useMediaQuery } from '@/hooks/use-media-query'
 import { Button } from './ui/button'
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet'
 import { Menu } from 'lucide-react'
-import { ModeToggle } from './Elements/mode-toggle'
+import { ModeToggle } from './Elements/ModeToggle'
 import { cn } from '@/lib/utils'
 import { Ephesis } from 'next/font/google'
 
