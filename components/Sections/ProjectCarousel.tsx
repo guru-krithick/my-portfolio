@@ -99,7 +99,7 @@ export default function ProjectCarousel() {
           ))}
         </Slider>
         <div className="flex justify-end mt-8">
-  <Link href="/#projects">
+  <Link href="/projects">
     <Button size="lg" className="rounded-md">
       View All Projects
     </Button>
