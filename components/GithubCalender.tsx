@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { GitHubCalendar } from 'github-contribution-calendar';
 
+// Custom theme for the GitHub calendar
 const myTheme = {
   noContributions: '#000000', // Light Blue for no submissions
   low: '#3B82F64A', // Light Purple-Blue for low submissions
@@ -15,12 +16,12 @@ export const GithubHeatmap = () => {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    // Ensure rendering only occurs on the client-side
+    // Set isClient to true once the component is mounted in the browser
     setIsClient(true);
   }, []);
 
-  if (!isClient) {
-    // Prevent rendering on the server-side
+  // If it's not the client (i.e., it's still being rendered on the server), return null
+  if (typeof window === 'undefined' || !isClient) {
     return null;
   }
 
