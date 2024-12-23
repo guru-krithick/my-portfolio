@@ -1,29 +1,19 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { GitHubCalendar } from 'github-contribution-calendar';
-
-// Custom theme for the GitHub calendar
-const myTheme = {
-  noContributions: '#000000', // Light Blue for no submissions
-  low: '#3B82F64A', // Light Purple-Blue for low submissions
-  moderate: '#3B82E6d2', // Purple-Blue for moderate submissions
-  high: '#3B82F6FE', // Blue for high submissions
-  veryHigh: '#3B82F6', // Darker Blue for very high submissions
-};
+import React from 'react';
+import GitHubCalendar from 'react-github-calendar';
 
 export const GithubHeatmap = () => {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    // Set to true after the first render, indicating we are now on the client
-    setIsClient(true);
-  }, []);
-
-  // Check if window is defined (this indicates we are on the client)
-  if (typeof window === 'undefined' || !isClient) {
-    return null;
-  }
+  // Define a custom theme for the GitHub calendar
+  const myTheme = {
+    background: '#27272A',
+    text: '#ffffff',
+    grade4: '#3B82F6', // Very high contributions
+    grade3: '#3B82F6FE', // High contributions
+    grade2: '#3B82E6d2', // Moderate contributions
+    grade1: '#3B82F64A', // Low contributions
+    grade0: '#000000', // No contributions
+  };
 
   return (
     <section id="activity" className="py-4">
@@ -32,15 +22,11 @@ export const GithubHeatmap = () => {
           <div className="flex justify-center">
             <GitHubCalendar
               username="guru-krithick"
-              token={process.env.NEXT_PUBLIC_GITHUB_ACCESS_TOKEN} // Public environment variable
-              year={2024} // Optional: defaults to the current year
-              showLabels={true} // Optional
-              fontSize={14} // Optional
-              labelColor="#ffffff" // Optional
-              theme="custom"
-              customTheme={myTheme} // Using custom color theme
-              background="#27272A"
-              className="rounded-lg border border-gray-400/30 hover:border-blue-400 transition-colors"
+              year={2024} // Optional: Show contributions for the year 2024
+              blockSize={15} // Optional: Size of the contribution blocks
+              blockMargin={5} // Optional: Margin between the blocks
+              theme={myTheme} // Apply custom theme
+              fontSize={14} // Optional: Font size for labels
             />
           </div>
           <p className="text-center mt-4 text-muted-foreground text-lg">
