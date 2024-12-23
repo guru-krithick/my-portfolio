@@ -36,7 +36,7 @@ export default function RootLayout({
       <body className={`${poppins.variable} ${playfair.variable} ${ephesis.variable} font-sans`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
           enableSystem={false}
           disableTransitionOnChange
         >
