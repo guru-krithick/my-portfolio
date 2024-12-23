@@ -16,11 +16,11 @@ export const GithubHeatmap = () => {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    // Set isClient to true once the component is mounted in the browser
+    // Set to true after the first render, indicating we are now on the client
     setIsClient(true);
   }, []);
 
-  // If it's not the client (i.e., it's still being rendered on the server), return null
+  // Check if window is defined (this indicates we are on the client)
   if (typeof window === 'undefined' || !isClient) {
     return null;
   }
