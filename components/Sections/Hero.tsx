@@ -10,7 +10,7 @@ export default function Hero() {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-secondary overflow-hidden">
       <div className="container mx-auto px-4 py-8 md:py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-10 items-center">
           {/* Left Column - Text Content */}
           <motion.div 
             className="text-center lg:text-left space-y-6"
@@ -18,10 +18,10 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold font-playfair">
+            <h1 className="text-2xl sm:text-4xl lg:text-6xl font-bold font-playfair">
               Hi There, I&apos;m <span className="bg-clip-text text-transparent animate-gradient-text font-playfair ">Guru Krithick</span>
             </h1>
-            <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground font-poppins">
+            <p className="text-lg sm:text-xl lg:text-xl text-muted-foreground font-poppins">
               Full Stack Developer & UI/UX Enthusiast
             </p>
             <motion.div
