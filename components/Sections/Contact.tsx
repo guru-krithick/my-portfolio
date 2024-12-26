@@ -178,7 +178,12 @@ export default function ContactSection() {
                 <Button
                   variant="outline"
                   className="group border-blue-200 hover:border-blue-300"
-                  onClick={() => window.open('/my-resume.pdf', '_blank')}
+                  onClick={() => {
+                    const link = document.createElement('a');
+                    link.href = '/My-resume.pdf'; // Replace with the actual path to your resume file
+                    link.download = 'My-resume.pdf'; // Set the desired file name
+                    link.click();
+                  }}
                 >
                   <Download className="mr-2 h-4 w-4 group-hover:animate-bounce" />
                   Resume
@@ -189,7 +194,9 @@ export default function ContactSection() {
                 <div className="md:min-w-[350px] min-w-full sm:min-w-[300px]">
                   <div className="flex p-2 items-center border rounded-full justify-between">
                     <div className="flex gap-3 items-center">
+                    <Link href="https://wa.me/9363041148">
                       <IoLogoWhatsapp className="text-blue-600 p-2 text-4xl bg-blue-200 rounded-full" />
+                      </Link>
                       <h1 className="font-semibold lg:text-md text-sm">
                         +91 93630 41148
                       </h1>

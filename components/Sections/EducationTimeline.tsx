@@ -15,17 +15,18 @@ const education = [
     description: "Currently pursuing my degree"
   },
   {
-    year: "2021",
-    degree: "Secondary School Leaving Certificate (SSLC)",
-    institution: "Doveton Boys Hr Sec School",
-    description: "Completed with distinction"
-  },
-  {
     year: "2023",
     degree: "Higher Secondary Certificate (HSC) in Maths & Computer Science",
     institution: "Doveton Boys Hr Sec School",
     description: "Graduated with high marks"
+  },
+  {
+    year: "2021",
+    degree: "Secondary School Leaving Certificate (SSLC)",
+    institution: "Doveton Boys Hr Sec School",
+    description: "Completed with distinction"
   }
+  
 ]
 
 export default function EducationTimeline() {
