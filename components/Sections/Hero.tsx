@@ -30,9 +30,25 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
-              {/* <Button size="lg" className="rounded-full">View Projects</Button> */}
-              <DownloadButton />
-              <Button size="xl" className="rounded-full">Contact Me</Button>
+              <Button
+  size="lg"
+  variant="outline"
+  className="rounded-full block lg:hidden"
+  onClick={() => {
+    const link = document.createElement('a');
+    link.href = '/My-resume.pdf'; // Replace with the actual path to your resume file
+    link.download = 'My-resume.pdf'; // Set the desired file name
+    link.click();
+  }}
+>
+  My Resume
+</Button>
+
+<div className="hidden lg:block">
+  <DownloadButton />
+</div>
+<Button size="xl" className="rounded-full">Contact Me</Button>
+
 
             </motion.div>
             
