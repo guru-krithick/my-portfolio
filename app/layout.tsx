@@ -2,6 +2,7 @@
 import './globals.css'
 import { Poppins, Playfair_Display, Ephesis } from 'next/font/google'
 import { ThemeProvider } from "@/components/ThemeProvider"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 
 const poppins = Poppins({ 
@@ -41,6 +42,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <SpeedInsights />
           
         </ThemeProvider>
         
