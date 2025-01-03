@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils'
 import { Ephesis } from 'next/font/google'
 
 // Import Leckerli One font
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 const ephesis = Ephesis({
   subsets: ['latin'],
   weight: '400',
