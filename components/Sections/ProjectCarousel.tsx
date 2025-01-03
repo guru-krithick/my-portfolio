@@ -5,31 +5,31 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ProjectCard from "../ProjectCard";
-import { Button } from "../ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import Link from "next/link";
+// import { Button } from "../ui/button";
+// import { ChevronLeft, ChevronRight } from "lucide-react";
+// import Link from "next/link";
 
 const projects = [
-  {
-    title: "Health-Connect",
-    subtitle: "Ecommerce",
-    image: "/health-connect.png",
-    liveUrl: "https://health-connect-web.vercel.app/",
-    githubUrl: "https://github.com/guru-krithick/health-connect",
-  },
-  {
-    title: "Certificate Generator",
-    subtitle: "HR Management",
-    image: "/certificate-generator.png",
-    liveUrl: "#",
-    githubUrl: "https://github.com/guru-krithick/Completion-Automation",
-  },
+  // {
+  //   title: "Health-Connect",
+  //   subtitle: "Ecommerce",
+  //   image: "/health-connect.png",
+  //   liveUrl: "https://health-connect-web.vercel.app/",
+  //   githubUrl: "https://github.com/guru-krithick/health-connect",
+  // },
   {
     title: "Portfolio",
     subtitle: "Portfolio Template",
     image: "/portfolio.png",
     liveUrl: "#",
     githubUrl: "https://github.com/guru-krithick/my-portfolio",
+  },
+  {
+    title: "Certificate Generator",
+    subtitle: "HR Management",
+    image: "/certificate-generator.png",
+    // liveUrl: "#",
+    githubUrl: "https://github.com/guru-krithick/Completion-Automation",
   },
 ];
 
@@ -38,7 +38,7 @@ export default function ProjectCarousel() {
 
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -70,7 +70,7 @@ export default function ProjectCarousel() {
               Projects
             </span>
           </h2>
-          <div className="flex gap-2">
+          {/* <div className="flex gap-2">
             <Button
               variant="outline"
               size="icon"
@@ -87,7 +87,7 @@ export default function ProjectCarousel() {
             >
               <ChevronRight className="h-4 w-4" />
             </Button>
-          </div>
+          </div> */}
         </div>
         
         {/* Slider */}
@@ -99,11 +99,11 @@ export default function ProjectCarousel() {
           ))}
         </Slider>
         <div className="flex justify-end mt-8">
-  <Link href="/projects">
+  {/* <Link href="/projects">
     <Button size="lg" className="rounded-md">
       View All Projects
     </Button>
-  </Link>
+  </Link> */}
 </div>
 
       </div>
