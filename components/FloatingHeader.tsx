@@ -7,7 +7,7 @@ import { useMediaQuery } from '@/hooks/use-media-query'
 import { Button } from './ui/button'
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet'
 import { Menu } from 'lucide-react'
-import { ModeToggle } from './Elements/ModeToggle'
+// import { ModeToggle } from './Elements/ModeToggle'
 import { cn } from '@/lib/utils'
 import { Ephesis } from 'next/font/google'
 
@@ -81,7 +81,7 @@ export default function FloatingHeader() {
 
     {isMobile ? (
       <div className="flex items-center gap-2">
-        <ModeToggle />
+        {/* <ModeToggle /> */}
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon" className="lg:hidden">

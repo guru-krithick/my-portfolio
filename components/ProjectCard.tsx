@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Globe, Github } from "lucide-react";
 import ProjectButton from "./Elements/ExploreButton";
+import { Button } from "./ui/button";
 
 interface ProjectCardProps {
   title: string;
@@ -72,7 +73,17 @@ export default function ProjectCard({
           </div>
 
           {/* Explore Button */}
-          <ProjectButton />
+          <Button
+  size="lg"
+  variant="default"
+  className="rounded-full block lg:hidden"
+>
+  My Resume
+</Button>
+        <div className="hidden lg:block">
+         <ProjectButton />
+         
+         </div>
         </div>
       </div>
     </motion.div>

@@ -18,8 +18,8 @@ const projects = [
   //   githubUrl: "https://github.com/guru-krithick/health-connect",
   // },
   {
-    title: "Portfolio",
-    subtitle: "Portfolio Template",
+    title: "Portfolio Template",
+    subtitle: "A simple Portfolio ",
     image: "/portfolio.png",
     liveUrl: "#",
     githubUrl: "https://github.com/guru-krithick/my-portfolio",
