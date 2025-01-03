@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger)
 const education = [
   {
     year: "2023 - 2027",
-    degree: "Bachelor of Engineering in Electronics and Communication Engineering",
+    degree: "Bachelor of Engineering in Electronics and Communication",
     institution: "Chennai Institute of Technology",
     description: "Currently pursuing my degree"
   },
