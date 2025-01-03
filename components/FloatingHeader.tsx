@@ -139,7 +139,7 @@ export default function FloatingHeader() {
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <ModeToggle />
+          {/* <ModeToggle /> */}
           <Button
             className="rounded-full px-5 hover:scale-105 transition-transform font-semibold"
             asChild
