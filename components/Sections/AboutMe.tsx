@@ -1,13 +1,12 @@
 'use client';
 
-import { motion } from 'framer-motion'
-import Image from 'next/image'
-import { Button } from "../ui/button"
-
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { Button } from "../ui/button";
 
 export default function AboutMe() {
   return (
-    <section id="activity" className="py-24">
+    <section id="activity" className="py-24 bg-white text-black">
       <div className="container mx-auto px-4">
         <motion.div
           className="flex flex-col md:flex-row items-center gap-12"
@@ -21,20 +20,22 @@ export default function AboutMe() {
             transition={{ type: "spring", stiffness: 300 }}
           >
             <div className="relative w-full aspect-square max-w-[500px] mx-auto">
-                          <Image 
-                            alt="Guru Krithick" 
-                            src="https://avatar.iran.liara.run/public/48" 
-                            fill
-                            className="object-cover rounded-full bg-card p-4"
-                            priority
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary opacity-20 rounded-full" />
-                        </div>
+              <Image 
+                alt="Guru Krithick" 
+                src="https://avatar.iran.liara.run/public/48" 
+                fill
+                className="object-cover rounded-full bg-gray-200 p-4"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary to-indigo-50 opacity-20 rounded-full" />
+            </div>
           </motion.div>
           <div className="w-full md:w-1/2">
-            <h2 className="text-3xl font-bold mb-4 font-playfair">About<span className="text-primary font-ephesis text-5xl font-medium "> Myself</span></h2>
+            <h2 className="text-3xl font-bold mb-4 font-playfair">
+              About<span className="text-blue-500 font-ephesis text-5xl font-medium"> Myself</span>
+            </h2>
             <p className="text-xl font-semibold mb-4">Passionate Developer & Creative Problem Solver</p>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-gray-700 mb-6">
               I&apos;m a full-stack developer with a passion for creating innovative and user-friendly web applications. 
               With a strong foundation in modern web technologies and a keen eye for design, I strive to build 
               seamless digital experiences that make a difference.
@@ -46,9 +47,7 @@ export default function AboutMe() {
             </motion.div>
           </div>
         </motion.div>
-        
       </div>
     </section>
-  )
+  );
 }
-

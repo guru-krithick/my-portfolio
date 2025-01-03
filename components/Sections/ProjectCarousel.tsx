@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import ProjectCard from "../ProjectCard";
+import ProjectCard from "../Elements/ProjectCard";
 // import { Button } from "../ui/button";
 // import { ChevronLeft, ChevronRight } from "lucide-react";
 // import Link from "next/link";

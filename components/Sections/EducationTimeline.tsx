@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger)
 const education = [
   {
     year: "2023 - 2027",
-    degree: "Bachelor of Engineering in Electronics and Communication",
+    degree: "Bachelor of Engineering in Electronics and Comms",
     institution: "Chennai Institute of Technology",
     description: "Currently pursuing my degree"
   },
@@ -26,7 +26,6 @@ const education = [
     institution: "Doveton Boys Hr Sec School",
     description: "Completed with distinction"
   }
-  
 ]
 
 export default function EducationTimeline() {
@@ -75,9 +74,9 @@ export default function EducationTimeline() {
   }, [])
 
   return (
-    <section id="experience" className="py-24 bg-gradient-to-br from-background to-secondary">
+    <section id="experience" className="py-24 bg-white">
       <div className="container mx-auto px-4">
-        <h2 className="font-ephesis text-6xl font-medium text-gray-900 dark:text-gray-100text-center mb-12 items-start">My{" "}
+        <h2 className="font-ephesis text-6xl font-medium text-gray-900 text-center mb-12 items-start">My{" "}
           <span className="font-playfair text-5xl text-primary font-bold">Education</span></h2>
         <div className="relative max-w-4xl mx-auto">
           <div
@@ -116,4 +115,3 @@ export default function EducationTimeline() {
     </section>
   )
 }
-

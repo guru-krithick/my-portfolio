@@ -8,7 +8,7 @@ import DownloadButton from '../Elements/DownloadButton';
 
 export default function Hero() {
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-secondary overflow-hidden">
+    <section id="home" className="min-h-screen flex items-center justify-center bg-white overflow-hidden">
       <div className="container mx-auto px-4 py-8 md:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-10 items-center">
           {/* Left Column - Text Content */}
@@ -18,7 +18,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="text-2xl sm:text-4xl lg:text-6xl font-bold font-playfair">
+            <h1 className="text-2xl sm:text-4xl lg:text-6xl text-gray-800 font-bold font-playfair">
               Hi There, I&apos;m <span className="bg-clip-text text-transparent animate-gradient-text font-playfair ">Guru Krithick</span>
             </h1>
             <p className="text-lg sm:text-xl lg:text-xl text-muted-foreground font-poppins">
@@ -75,10 +75,10 @@ export default function Hero() {
                 alt="Guru Krithick" 
                 src="https://avatar.iran.liara.run/public/48" 
                 fill
-                className="object-cover rounded-full bg-card p-4"
+                className="object-cover rounded-full bg-gray-200 p-4 "
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary opacity-20 rounded-full" />
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-indigo-50 opacity-20 rounded-full" />
             </div>
           </motion.div>
         </div>

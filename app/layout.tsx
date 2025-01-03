@@ -1,9 +1,6 @@
-
 import './globals.css'
 import { Poppins, Playfair_Display, Ephesis } from 'next/font/google'
-// import { ThemeProvider } from "@/components/ThemeProvider"
 import { SpeedInsights } from "@vercel/speed-insights/next"
-
 
 const poppins = Poppins({ 
   subsets: ['latin'],
@@ -35,19 +32,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${poppins.variable} ${playfair.variable} ${ephesis.variable} font-sans`}>
-        {/* <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem={false}
-          disableTransitionOnChange
-        > */}
-          {children}
-          <SpeedInsights />
-          
-        {/* </ThemeProvider> */}
-        
+        {children}
+        <SpeedInsights />
       </body>
     </html>
   )
 }
-

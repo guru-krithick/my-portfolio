@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 const Experience = () => {
   return (
-    <div className="lg:px-20 px-8 py-10 bg-background text-foreground">
+    <div className="lg:px-20 px-8 py-10 bg-gray-50">
       <motion.h1
         initial={{ opacity: 0, scale: 0.4, x: 100 }}
         whileInView={{ opacity: 1, scale: 1, x: 0 }}

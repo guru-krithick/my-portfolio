@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-
 import React, { useState } from 'react';
- // Assuming this is your styled component
 
 const DownloadButton = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -15,9 +13,9 @@ const DownloadButton = () => {
 
   const triggerDownload = () => {
     const link = document.createElement('a');
-    link.href = '/My-resume.pdf';  // Path to your resume inside the public folder
-    link.download = 'resume.pdf';  // The name of the file when downloaded
-    link.click();  // Trigger the download
+    link.href = '/My-resume.pdf'; // Path to your resume inside the public folder
+    link.download = 'resume.pdf'; // The name of the file when downloaded
+    link.click(); // Trigger the download
   };
 
   return (
@@ -32,7 +30,7 @@ const DownloadButton = () => {
           />
           <span className="circle relative flex items-center justify-center w-8 h-8 bg-primary rounded-full cursor-pointer">
             <svg
-              className="icon w-5 h-5 fill-current text-gray-600 dark:text-gray-300"
+              className="icon w-5 h-5 fill-current text-gray-600"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -46,21 +44,15 @@ const DownloadButton = () => {
                 d="M12 19V5m0 14-4-4m4 4 4-4"
               />
             </svg>
-            <div className="square absolute bottom-0 w-2.5 h-2.5 bg-gray-600 dark:bg-gray-300 rounded-full"></div>
+            <div className="square absolute bottom-0 w-2.5 h-2.5 bg-gray-600 rounded-full"></div>
           </span>
-          <p className="title text-gray-500 dark:text-gray-300">Download</p>
-          <p className="title text-gray-500 dark:text-gray-300">Open</p>
+          <p className="title text-gray-500">Download</p>
+          <p className="title text-gray-500">Open</p>
         </label>
       </div>
     </StyledWrapper>
   );
-};
-
-
-
-
-
-  
+};  
 
 const StyledWrapper = styled.div`
   .container {
