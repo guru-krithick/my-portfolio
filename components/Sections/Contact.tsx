@@ -57,7 +57,7 @@ export default function ContactSection() {
   ];
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-white p-4 sm:p-8">
+    <section id="contact" className="min-h-screen flex items-center justify-center bg-white p-4 sm:p-8">
       <div className="max-w-4xl w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

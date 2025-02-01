@@ -1,6 +1,7 @@
 import './globals.css'
 import { Poppins, Playfair_Display, Ephesis } from 'next/font/google'
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/react"
 import Script from 'next/script'
 
 const poppins = Poppins({ 
@@ -40,6 +41,9 @@ export default function RootLayout({
         {/* Vercel Speed Insights */}
         <SpeedInsights />
 
+        {/* Vercel Analytics */}
+        <Analytics />
+
         {/* Google Analytics */}
         {trackingId && (
           <>
@@ -58,6 +62,7 @@ export default function RootLayout({
                 gtag('js', new Date());
 
                 gtag('config', '${trackingId}');
+                page_path: window.location.pathname,
               `}
             </Script>
           </>

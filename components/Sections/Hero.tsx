@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { TerminalAnimation } from "@/components/Elements/TerminalAnimation";
 import DownloadButton from "../Elements/DownloadButton";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -57,18 +58,21 @@ export default function Hero() {
               </div>
 
               {/* Contact Me Button */}
+              <Link href="#contact">
               <Button
                 size="xl"
-                className=" hidden lg:block rounded-full px-6 py-3 text-sm md:text-base bg-black text-white shadow-md hover:shadow-lg hover:bg-gray-800 transition-all ease-in-out"
+                className=" hidden lg:block rounded-full px-6 py-3 mt-1 text-sm md:text-base bg-black text-white shadow-md hover:shadow-lg hover:bg-gray-800 transition-all ease-in-out"
               >
                 Contact Me
               </Button>
-              <Button
-                size="lg"
-                className="block lg:hidden rounded-full px-6 py-3 text-sm md:text-base bg-black text-white shadow-md hover:shadow-lg hover:bg-gray-800 transition-all ease-in-out"
-              >
-                Contact Me
-              </Button>
+
+                <Button
+                  size="lg"
+                  className="block lg:hidden rounded-full px-6 py-3 text-sm md:text-base bg-black text-white shadow-md hover:shadow-lg hover:bg-gray-800 transition-all ease-in-out"
+                >
+                  Contact me
+                </Button>
+              </Link>
             </motion.div>
 
             {/* Terminal Animation */}
