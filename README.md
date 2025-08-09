@@ -78,7 +78,7 @@ cd my-portfolio
 ```bash
 npm install
 # or
-yarn install
+pnpm install
 ```
 
 3. **Run development server**
